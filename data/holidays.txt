@@ -1,0 +1,35 @@
+1.1.2024,Novo leto,fixed
+2.1.2024,Novo leto,fixed
+8.2.2024,Prešernov dan,fixed
+31.3.2024,Velika noč,not-fixed
+1.4.2024,Velikonočni ponedeljek,not-fixed
+27.4.2024,Dan upora proti okupatorju,fixed
+1.5.2024,Praznik dela,fixed
+2.5.2024,Praznik dela,fixed
+19.5.2024,Binkošti,not-fixed
+25.6.2024,Dan državnosti,fixed
+15.8.2024,Marijino vnebovzetje,fixed
+31.10.2024,Dan reformacije,fixed
+1.11.2024,Dan spomina na mrtve,fixed
+25.12.2024,Božič,fixed
+26.12.2024,Dan samostojnosti in enotnosti,fixed
+15.4.2001,Velika noč,not-fixed
+31.3.2002,Velika noč,not-fixed
+20.4.2003,Velika noč,not-fixed
+11.4.2004,Velika noč,not-fixed
+27.3.2005,Velika noč,not-fixed
+16.4.2006,Velika noč,not-fixed
+8.4.2007,Velika noč,not-fixed
+23.3.2008,Velika noč,not-fixed
+12.4.2009,Velika noč,not-fixed
+4.4.2010,Velika noč,not-fixed
+24.4.2011,Velika noč,not-fixed
+8.4.2012,Velika noč,not-fixed
+31.3.2013,Velika noč,not-fixed
+20.4.2014,Velika noč,not-fixed
+5.4.2015,Velika noč,not-fixed
+27.3.2016,Velika noč,not-fixed
+16.4.2017,Velika noč,not-fixed
+1.4.2018,Velika noč,not-fixed
+21.4.2019,Velika noč,not-fixed
+12.4.2020,Velika noč,not-fixed
