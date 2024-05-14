@@ -51,8 +51,7 @@ header h1 {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 5px 10px;
 }
 
 .search-bar label {
@@ -69,11 +68,7 @@ header h1 {
   border-radius: 5px;
   padding: 5px;
   margin-left: 5px;
-  /* outline-color: var(--calendar-header-color); */
-}
-
-.error {
-  outline-color: #ff4d4d;
+  outline-color: var(--calendar-header-color);
 }
 
 .search-bar .search-btn {
@@ -85,6 +80,43 @@ header h1 {
   margin-left: 5px;
   cursor: pointer;
 }
+
+/* Errors */
+.error {
+  color: #ff4d4d;
+  border: 2px solid #ff4d4d;  
+  border-radius: 5px;  
+  font-weight: 600;
+}
+
+.input-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px; 
+  padding: 0 10px;
+  margin: 0 10px;
+  visibility: hidden;
+}
+
+.year-error-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.year-error {
+  font-size: 12px; 
+  padding: 0 5px;
+  margin: 5px;
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
 
 /* Calendar Container */
 .calendar {
@@ -101,16 +133,31 @@ header h1 {
   justify-content: space-between;
   border-top: 1px solid var(--border-color-light);
   padding-top: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .calendar-navigation .calendar-month,
-.calendar-navigation .calendar-year {
+.calendar-navigation .calendar-year,
+.calendar-navigation .today-btn {
   font-size: 18px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 5px;
   outline-color: var(--calendar-header-color);
+}
+
+.calendar-navigation .today-btn {
+  width: 100px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.today-btn:hover {
+  border: 1px solid var(--calendar-header-color);
+  background-color: #e8f3fd;
+  -webkit-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear;
 }
 
 .calendar-navigation .calendar-year {
@@ -143,8 +190,7 @@ header h1 {
 
 .calendar-weekdays div,
 .calendar-dates div {
-  width: 3rem;  
-  height: 3rem;  
+  width: 3rem;   
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +198,12 @@ header h1 {
   padding: 0.5rem;
 }
 
+.calendar-dates div{
+  height: 3rem;
+}
+
 .calendar-weekdays div {
+  height: 2rem; 
   align-items: end;
 }
 

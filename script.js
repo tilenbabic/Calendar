@@ -6,17 +6,38 @@ const searchForm = document.getElementById('search-form');
 const monthInput = document.getElementById('month');
 const yearInput = document.getElementById('year');
 const dateInput = document.getElementById('date-input');
+const todayBtn = document.getElementById('calendar-today');
+
 
 // Variable stores what date is currently displayed. Initial value is todays date.
 const displayedDate = new Date();
 
 
-export const getElementsValue = (element) => { 
+function displayError (errorId, msg) {
+  const errorElement = document.getElementById(errorId);
+  errorElement.innerHTML = msg;
+  errorElement.classList.add("visible");
+}
+
+function hideError (errorId) {
+  const errorElement = document.getElementById(errorId);
+  errorElement.classList.remove("visible");
+}
+
+const getElementsValue = (element) => { 
   return element.value;
 }
 
-export const setElementsValue = (element, val) => {
+const setElementsValue = (element, val) => {
   element.value = val;
+}
+
+function clearUI() {
+  hideError('date-input-error');
+  hideError('year-input-error');
+  setElementsValue(monthInput, displayedDate.getMonth());
+  setElementsValue(yearInput, displayedDate.getFullYear());
+  setElementsValue(dateInput, "");
 }
 
 // Function is executed when the user searches for a specific date.
@@ -25,26 +46,31 @@ function onDateSubmit(e) {
   e.preventDefault();
 
   let date = getElementsValue(dateInput);
+  if(date.length == 0){
+    displayError('date-input-error', "Input Error: Input field is empty, you forgot to select a date!");
+    return;
+  }
   // Check (with regex) that the input is in the format dd.mm.yyyy .
   let dateFormatRegex = /^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$/;
   if(!dateFormatRegex.test(date)){
-    // raise warning
-    // dateInput.classList.add('error');
-    console.log(`Invalid date format: ${date}`);
+    displayError('date-input-error', "Input Error: Date format is incorrect, please use dd.mm.yyyy!");
     return;
   }
-  // Check if date is valid (eg. 30.2.2024 passes first validation, but is not a valid date).
   const [day, month, year] = date.split('.').map(Number);
-  if(!isValidDate(year, month-1, day)){
-    // raise warning
-    console.log(`Invalid date: ${date}`);
+  if(!(1900 <= year && year <= 2100)){
+    displayError('date-input-error', "Input Error: Please select a date between 1900 and 2100!");
     return;
   }
-
-  console.log(`Valid date: ${date}`); 
+  // Check if date is valid (eg. 30.2.2024 passes first two validations, but is not a valid date).
+  if(!isValidDate(year, month-1, day)){
+    displayError('date-input-error', "Input Error: Date does not exist, please select a valid date!");
+    return;
+  }
 
   // Date is valid, update UI.
   displayedDate.setFullYear(year, month-1, day);
+  hideError('date-input-error');
+  hideError('year-input-error');
   setElementsValue(monthInput, displayedDate.getMonth());
   setElementsValue(yearInput, displayedDate.getFullYear());
   displayCalendar('dates', displayedDate.getFullYear(), displayedDate.getMonth());
@@ -54,6 +80,7 @@ function onDateSubmit(e) {
 function onMonthChange() {
   displayedDate.setMonth(getElementsValue(monthInput));
   displayCalendar('dates', displayedDate.getFullYear(), displayedDate.getMonth());
+  clearUI();
 }
 
 // Function is executed when year is changes through input field.
@@ -69,10 +96,21 @@ function onYearChange() {
     return;
   }
 
+  if(!(1900 <= yearValue && yearValue <= 2100)){
+    displayError('year-input-error', "Input Error: Please select a year between 1900 and 2100!");
+    return;
+  }
+
   displayedDate.setFullYear(yearValue);
   displayCalendar('dates', displayedDate.getFullYear(), displayedDate.getMonth());
+  clearUI();
 }
 
+function changeCalendarToToday(){
+  displayedDate.setTime(new Date().getTime());
+  displayCalendar('dates', displayedDate.getFullYear(), displayedDate.getMonth());
+  clearUI();  
+}
 
 async function initHolidays(){
   await readHolidays('data/holidays.txt').catch((error) => console.log(error));
@@ -82,13 +120,10 @@ async function initHolidays(){
 
 function onDOMContentLoaded() {
   // Set calendar to todays date.
-  setElementsValue(monthInput, displayedDate.getMonth());
-  setElementsValue(yearInput, displayedDate.getFullYear());
-
   initHolidays();
   displayCalendar('dates', displayedDate.getFullYear(), displayedDate.getMonth());
+  clearUI();
 }
-
 
 // Initialize app.
 function init() {
@@ -96,11 +131,10 @@ function init() {
   searchForm.addEventListener('submit', onDateSubmit);
   monthInput.addEventListener('change', onMonthChange);
   yearInput.addEventListener('input', onYearChange);
+  todayBtn.addEventListener('click', changeCalendarToToday);
   document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
 }
 
 init();
 
-
-// dateInput.setCustomValidity("Lorum Ipsum");
 

@@ -27,17 +27,24 @@
           placeholder="DD.MM.YYYY"
           maxlength="10"
           autocomplete="off"
-          required
+          oninput="this.value = this.value.replace(/[^0-9|\.]/g, '')"
         />
         <button type="submit" class="search-btn">
           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
         </button>
       </div>
+      <div class="error input-error" id="date-input-error">
+        Input Error
+      </div>
+      
     </form>
 
     <!-- Calendar Container-->
     <div class="calendar">
       <div class="calendar-navigation">
+        <button type="button" class="today-btn" id="calendar-today">
+          Today
+        </button>
         <select id='month' class="calendar-month">
           <option value=0>January</option>
           <option value=1>February</option>
@@ -60,8 +67,13 @@
           placeholder="Year"
           maxlength="4"
           autocomplete="off"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '')"
         />
+        
       </div>  
+      <div class="year-error-box">
+        <span class="error year-error" id="year-input-error">Input Error</span>
+      </div>
       <div class="calendar-body">
         <div class="calendar-weekdays">
           <div>Mon</div>
